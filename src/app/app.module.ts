@@ -9,9 +9,10 @@ import { AppComponent } from './app.component';
 import { TICKETS_FEATURE_KEY, ticketsReducer } from './state/tickets.reducer';
 import { TicketsEffects } from './state/tickets.effects';
 import { TicketDetailComponent } from './containers/ticket-detail/ticket-detail.component';
+import { TicketListComponent } from './containers/ticket-list/ticket-list.component';
 
 @NgModule({
-  declarations: [AppComponent, TicketDetailComponent],
+  declarations: [AppComponent, TicketDetailComponent, TicketListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

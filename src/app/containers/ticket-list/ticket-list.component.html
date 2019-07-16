@@ -1,0 +1,7 @@
+<ul>
+  <li *ngFor="let t of ticketsFacade.tickets$ | async">
+    <a [routerLink]="['/tickets', t.id]"
+      >Ticket: {{ t.id }}, {{ t.description }}</a
+    >
+  </li>
+</ul>
