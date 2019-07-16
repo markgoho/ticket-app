@@ -1,27 +1,20 @@
-# NrwlTest
+# Coding Assignment
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.1.
+The goal of this assignment is to showcase your ability to develop features and your coding style. Due to the time constraint you will have to prioritize what you work on, and have to try and balance cleanliness with just getting it done.
 
-## Development server
+Even though the app is small, one can easily spend the whole week working on it: perfecting styles, testing every single method, or carefully crafting every single line of code. Please don't! Do as much as you can in about two hours and share the results.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+The most important part of the interview will come after this one, when we look at the app together, talk about the decisions you have made, etc..
 
-## Code scaffolding
+## Ticketing managing application
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Build a ticket managing app, where the user can add, filter, assign, and complete tickets.
 
-## Build
+- The app should have two screens: the list screen and the details screen. Please use the Angular router to manage the transitions between them.
+- Even though we tend to use NgRx for state management, you can use a different approach if you think it fits better.
+- Write a couple of tests. The goal here is not to build a production-quality app, so don't test every single detail. Two or three tests should be good enough.
+- Don't forget about error handling and race conditions. The API server has a random delay. If you bump it up to say 10 seconds, would the app still work correctly?
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Submitting your solution
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Please send us the link to your Stackblitz fork. We will continue to work on it during the pair-programming sessions. Please also indicate approximately how long you spent on the submission.

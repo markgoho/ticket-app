@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { BackendService } from './backend.service';
+import { TicketsFacade } from './state/tickets.facade';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +8,5 @@ import { BackendService } from './backend.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  tickets = this.backend.tickets();
-  users = this.backend.users();
-
-  constructor(private backend: BackendService) {}
+  constructor(public ticketsFacade: TicketsFacade) {}
 }

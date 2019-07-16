@@ -47,7 +47,7 @@ export class BackendService {
     return this.storedUsers.find(user => user.id === id);
   }
 
-  tickets() {
+  tickets(): Observable<Ticket[]> {
     return of(this.storedTickets).pipe(delay(randomDelay()));
   }
 
