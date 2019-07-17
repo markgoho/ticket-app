@@ -1,10 +1,12 @@
 import { createReducer, on, Action } from '@ngrx/store';
 
-import { Ticket } from '../backend.service';
+import { Ticket } from '../../backend.service';
 import {
   getTicketsStart,
   getTicketsSuccess,
-  getTicketsFail
+  getTicketsFail,
+  assignTicketSuccess,
+  completeTicketSuccess
 } from './tickets.actions';
 
 export const TICKETS_FEATURE_KEY = 'tickets';
@@ -34,7 +36,19 @@ export const reducer = createReducer<TicketsState>(
     loading: false,
     loaded: true
   })),
-  on(getTicketsFail, state => ({ ...state, loading: false }))
+  on(getTicketsFail, state => ({ ...state, loading: false })),
+  on(assignTicketSuccess, (state, { ticket }) => ({
+    ...state,
+    tickets: updateTicket(state.tickets, ticket),
+    loading: false,
+    loaded: true
+  })),
+  on(completeTicketSuccess, (state, { ticket }) => ({
+    ...state,
+    tickets: updateTicket(state.tickets, ticket),
+    loading: false,
+    loaded: true
+  }))
 );
 
 export function ticketsReducer(
@@ -42,4 +56,19 @@ export function ticketsReducer(
   action: Action
 ) {
   return reducer(state, action);
+}
+
+function updateTicket(tickets: Ticket[], newTicket: Ticket): Ticket[] {
+  return tickets.map(existingTicket => {
+    if (existingTicket.id === newTicket.id) {
+      const updatedTicket = {
+        ...existingTicket,
+        ...newTicket
+      };
+
+      return updatedTicket;
+    } else {
+      return existingTicket;
+    }
+  });
 }

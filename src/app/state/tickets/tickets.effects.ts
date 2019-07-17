@@ -1,13 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { switchMap, map, catchError, concatMap } from 'rxjs/operators';
+import { switchMap, map, catchError } from 'rxjs/operators';
 
-import { BackendService } from '../backend.service';
+import { BackendService } from '../../backend.service';
 import {
   getTicketsStart,
   getTicketsFail,
-  getTicketsSuccess
+  getTicketsSuccess,
+  createTicketStart,
+  createTicketSuccess,
+  createTicketFail,
+  assignTicketStart,
+  assignTicketSuccess,
+  assignTicketFail,
+  completeTicketStart,
+  completeTicketSuccess,
+  completeTicketFail
 } from './tickets.actions';
 
 @Injectable()
@@ -21,6 +30,42 @@ export class TicketsEffects {
           catchError(() => of(getTicketsFail()))
         )
       )
+    )
+  );
+
+  createTicket$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(createTicketStart),
+      switchMap(({ description }) => {
+        return this.backend.newTicket(description).pipe(
+          map(ticket => createTicketSuccess({ ticket })),
+          catchError(() => of(createTicketFail()))
+        );
+      })
+    )
+  );
+
+  assignTicket$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(assignTicketStart),
+      switchMap(({ userId, ticketId }) => {
+        return this.backend.assign(ticketId, userId).pipe(
+          map(ticket => assignTicketSuccess({ ticket })),
+          catchError(() => of(assignTicketFail()))
+        );
+      })
+    )
+  );
+
+  completeTicket$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(completeTicketStart),
+      switchMap(({ ticketId }) => {
+        return this.backend.complete(ticketId).pipe(
+          map(ticket => completeTicketSuccess({ ticket })),
+          catchError(() => of(completeTicketFail()))
+        );
+      })
     )
   );
 

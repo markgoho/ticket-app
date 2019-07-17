@@ -1,5 +1,10 @@
-ul {
+:host {
+  display: block;
   padding: 1rem;
+}
+
+:host > * + * {
+  margin: 1rem 0;
 }
 
 ul > * + * {
@@ -12,9 +17,4 @@ li {
   background-color: hsl(220, 55%, 65%);
   list-style: none;
   padding: 1rem;
-}
-
-a {
-  text-decoration: none;
-  color: hsl(0, 0%, 18%);
 }

@@ -1,1 +1,47 @@
-<p>ticket-detail works!</p>
+<a routerLink="/tickets">Back</a>
+
+<div class="ticket-container" *ngIf="currentTicket$ | async as ticket">
+  <h2 [class.completed]="ticket.completed">
+    {{ ticket.description }}
+    <button
+      *ngIf="ticket.completed === false"
+      (click)="ticketsFacade.completeTicket(ticket.id)"
+      type="button"
+    >
+      Complete Ticket
+    </button>
+  </h2>
+  <p *ngIf="assignee$ | async as user; else noAssignee">
+    Currently assigned to: {{ user.name }}
+    <button
+      type="button"
+      (click)="assignUser = !assignUser"
+      *ngIf="!assignUser"
+    >
+      Change Assignment
+    </button>
+  </p>
+  <select
+    (change)="assignUserToTicket($event.target.value, ticket.id)"
+    *ngIf="assignUser"
+    name="users"
+    id="users"
+  >
+    <option *ngFor="let user of usersFacade.users$ | async" [value]="user.id">{{
+      user.name
+    }}</option>
+  </select>
+</div>
+
+<ng-template #noAssignee>
+  <p>
+    No assignee yet.
+    <button
+      *ngIf="!assignUser"
+      type="button"
+      (click)="assignUser = !assignUser"
+    >
+      Assign User
+    </button>
+  </p>
+</ng-template>

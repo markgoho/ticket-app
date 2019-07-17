@@ -35,7 +35,11 @@ export class BackendService {
     }
   ];
 
-  storedUsers: User[] = [{ id: 111, name: 'Victor' }];
+  storedUsers: User[] = [
+    { id: 111, name: 'Victor' },
+    { id: 112, name: 'Mark' },
+    { id: 113, name: 'Jeff' }
+  ];
 
   lastId = 1;
 
@@ -64,6 +68,7 @@ export class BackendService {
   }
 
   newTicket(payload: { description: string }): Observable<Ticket> {
+    console.log(payload);
     const newTicket: Ticket = {
       id: ++this.lastId,
       description: payload.description,
@@ -86,6 +91,7 @@ export class BackendService {
         delay(randomDelay()),
         tap((ticket: Ticket) => {
           ticket.assigneeId = +userId;
+          console.log('Service', ticket);
         })
       );
     }
@@ -93,13 +99,13 @@ export class BackendService {
     return throwError(new Error('ticket or user not found'));
   }
 
-  complete(ticketId: number, completed: boolean): Observable<Ticket> {
+  complete(ticketId: number, completed: boolean = true): Observable<Ticket> {
     const foundTicket = this.findTicketById(ticketId);
     if (foundTicket) {
       return of(foundTicket).pipe(
         delay(randomDelay()),
         tap((ticket: Ticket) => {
-          ticket.completed = true;
+          ticket.completed = completed;
         })
       );
     }

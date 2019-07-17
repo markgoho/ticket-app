@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
-import {
-  CanActivate,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  Router
-} from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { TicketsFacade } from './state/tickets.facade';
+import { TicketsFacade } from './state/tickets/tickets.facade';
 import { filter, withLatestFrom, map, tap } from 'rxjs/operators';
 import { Ticket } from './backend.service';
 

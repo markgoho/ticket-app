@@ -16,3 +16,12 @@ li {
   padding: 0;
   margin: 0;
 }
+
+a {
+  text-decoration: none;
+  color: hsl(0, 0%, 18%);
+}
+
+.completed {
+  text-decoration: line-through;
+}

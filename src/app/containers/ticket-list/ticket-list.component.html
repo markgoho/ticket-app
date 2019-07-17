@@ -1,6 +1,26 @@
+<button type="button" (click)="createTicket = !createTicket">
+  {{ createTicket ? 'Cancel' : 'Create New Ticket' }}
+</button>
+
+<form
+  [formGroup]="ticketForm"
+  class="create-ticket"
+  *ngIf="createTicket"
+  (ngSubmit)="addTicket()"
+>
+  <label for="description">Ticket Description</label>
+  <input
+    formControlName="description"
+    type="text"
+    name="description"
+    id="description"
+  />
+  <button type="submit">Create Ticket</button>
+</form>
+
 <ul>
   <li *ngFor="let t of ticketsFacade.tickets$ | async">
-    <a [routerLink]="['/tickets', t.id]"
+    <a [class.completed]="t.completed" [routerLink]="['/tickets', t.id]"
       >Ticket: {{ t.id }}, {{ t.description }}</a
     >
   </li>
